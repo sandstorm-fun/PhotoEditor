@@ -867,7 +867,7 @@ public class PhotoEditor implements BrushViewChangeListener {
             brushDrawingView = photoEditorView.getBrushDrawingView();
         }
 
-        Builder setDeleteView(View deleteView) {
+        public Builder setDeleteView(View deleteView) {
             this.deleteView = deleteView;
             return this;
         }
