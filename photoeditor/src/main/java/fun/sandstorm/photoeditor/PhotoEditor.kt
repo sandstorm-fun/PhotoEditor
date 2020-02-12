@@ -37,7 +37,7 @@ class PhotoEditor(builder: Builder) : ja.burhanrashid52.photoeditor.PhotoEditor(
         }
 
         override fun build(): PhotoEditor {
-            return super.build() as PhotoEditor
+            return PhotoEditor(this)
         }
     }
 }
