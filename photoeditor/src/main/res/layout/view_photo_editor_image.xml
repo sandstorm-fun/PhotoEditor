@@ -9,14 +9,14 @@
         android:layout_height="25dp"
         android:layout_gravity="top|start"
         android:elevation="1dp"
+        android:visibility="gone"
         android:src="@drawable/ic_remove" />
 
     <FrameLayout
         android:id="@+id/frmBorder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_border_tv">
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/imgPhotoEditorImage"
