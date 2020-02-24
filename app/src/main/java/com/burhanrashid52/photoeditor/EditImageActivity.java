@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.burhanrashid52.photoeditor.tools.ToolType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import ja.burhanrashid52.photoeditor.OnPhotoEditorListener;
 import fun.sandstorm.photoeditor.PhotoEditor;
@@ -304,6 +306,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
             switch (requestCode) {
                 case CAMERA_REQUEST:
                     mPhotoEditor.clearAllViews();
+                    
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                     mPhotoEditorView.getSource().setImageBitmap(photo);
                     break;
@@ -346,8 +349,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     }
 
     @Override
-    public void onStickerClick(Bitmap bitmap) {
-        mPhotoEditor.addImage(bitmap);
+    public void onStickerClick(Bitmap bitmap, int id) {
+        mPhotoEditor.addImage(bitmap, id);
         mTxtCurrentTool.setText(R.string.label_sticker);
     }
 
@@ -411,8 +414,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 });
                 break;
             case ERASER:
-                mPhotoEditor.brushEraser();
-                mTxtCurrentTool.setText(R.string.label_eraser_mode);
+                List<View> views = mPhotoEditor.getAllViews();
+                View view = ((ViewGroup)views.get(0));
+                float x = view.getX();
+                float y = view.getY();
+                int id =  (int)view.getTag(R.id.resourceId);
                 break;
             case FILTER:
                 mTxtCurrentTool.setText(R.string.label_filter);

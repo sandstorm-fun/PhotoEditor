@@ -30,7 +30,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     }
 
     public interface StickerListener {
-        void onStickerClick(Bitmap bitmap);
+        void onStickerClick(Bitmap bitmap, int resId);
     }
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -109,7 +109,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
                         if (mStickerListener != null) {
                             mStickerListener.onStickerClick(
                                     BitmapFactory.decodeResource(getResources(),
-                                            stickerList[getLayoutPosition()]));
+                                            stickerList[getLayoutPosition()]), stickerList[getLayoutPosition()]);
                         }
                         dismiss();
                     }

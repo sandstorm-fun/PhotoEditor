@@ -76,11 +76,13 @@ public class PhotoEditor implements BrushViewChangeListener {
      *
      * @param desiredImage bitmap image you want to add
      */
-    public void addImage(Bitmap desiredImage) {
-        final View imageRootView = getLayout(ViewType.IMAGE);
+    public void addImage(Bitmap desiredImage, int resId) {
+        final View imageRootView = getLayout(ViewType.IMAGE, resId);
         final ImageView imageView = imageRootView.findViewById(R.id.imgPhotoEditorImage);
         final FrameLayout frmBorder = imageRootView.findViewById(R.id.frmBorder);
         final ImageView imgClose = imageRootView.findViewById(R.id.imgPhotoEditorClose);
+
+
 
         imageView.setImageBitmap(desiredImage);
 
@@ -312,13 +314,18 @@ public class PhotoEditor implements BrushViewChangeListener {
         return multiTouchListener;
     }
 
+
+    private View getLayout(final ViewType viewType) {
+        return getLayout(viewType, 0);
+    }
+
     /**
      * Get root view by its type i.e image,text and emoji
      *
      * @param viewType image,text or emoji
      * @return rootview
      */
-    private View getLayout(final ViewType viewType) {
+    private View getLayout(final ViewType viewType, int resId) {
         View rootView = null;
         switch (viewType) {
             case TEXT:
@@ -333,6 +340,7 @@ public class PhotoEditor implements BrushViewChangeListener {
                 break;
             case IMAGE:
                 rootView = mLayoutInflater.inflate(R.layout.view_photo_editor_image, null);
+                rootView.setTag(R.id.resourceId, resId);
                 break;
             case EMOJI:
                 rootView = mLayoutInflater.inflate(R.layout.view_photo_editor_text, null);
@@ -560,6 +568,10 @@ public class PhotoEditor implements BrushViewChangeListener {
         addedViews.clear();
         redoViews.clear();
         clearBrushAllViews();
+    }
+
+    public List<View> getAllViews() {
+        return addedViews;
     }
 
     /**
