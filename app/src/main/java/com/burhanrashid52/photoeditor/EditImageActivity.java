@@ -82,7 +82,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         initViews();
 
-        handleIntentImage(mPhotoEditorView.getSource());
+        handleIntentImage();
 
         mWonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
 
@@ -117,14 +117,14 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         // mPhotoEditorView.getSource().setImageResource(R.drawable.color_palette);
     }
 
-    private void handleIntentImage(ImageView source) {
+    private void handleIntentImage() {
         Intent intent = getIntent();
         if (intent != null) {
             String intentType = intent.getType();
             if (intentType != null && intentType.startsWith("image/")) {
                 Uri imageUri = intent.getData();
                 if (imageUri != null) {
-                    source.setImageURI(imageUri);
+                    mPhotoEditorView.setImageURI(imageUri);
                 }
             }
         }
@@ -144,6 +144,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         mRvTools = findViewById(R.id.rvConstraintTools);
         mRvFilters = findViewById(R.id.rvFilterView);
         mRootView = findViewById(R.id.rootView);
+
+        mPhotoEditorView.setBackgroundResource(R.drawable.got_s);
 
         imgUndo = findViewById(R.id.imgUndo);
         imgUndo.setOnClickListener(this);
@@ -280,7 +282,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         hideLoading();
                         showSnackbar("Image Saved Successfully");
                         mSaveImageUri = Uri.fromFile(new File(imagePath));
-                        mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
+                        mPhotoEditorView.setImageURI(mSaveImageUri);
                     }
 
                     @Override
@@ -305,14 +307,14 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 case CAMERA_REQUEST:
                     mPhotoEditor.clearAllViews();
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
-                    mPhotoEditorView.getSource().setImageBitmap(photo);
+                    mPhotoEditorView.setImageBitmap(photo);
                     break;
                 case PICK_REQUEST:
                     try {
                         mPhotoEditor.clearAllViews();
                         Uri uri = data.getData();
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        mPhotoEditorView.getSource().setImageBitmap(bitmap);
+                        mPhotoEditorView.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

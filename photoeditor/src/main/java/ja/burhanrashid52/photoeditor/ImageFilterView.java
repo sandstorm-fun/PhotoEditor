@@ -31,7 +31,7 @@ import static ja.burhanrashid52.photoeditor.PhotoFilter.*;
  * @version 0.1.2
  * @since 2/14/2018
  */
-class ImageFilterView extends GLSurfaceView implements GLSurfaceView.Renderer {
+public class ImageFilterView extends GLSurfaceView implements GLSurfaceView.Renderer {
 
     private static final String TAG = "ImageFilterView";
     private int[] mTextures = new int[2];

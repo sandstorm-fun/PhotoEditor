@@ -128,7 +128,11 @@ public class PhotoEditorView extends RelativeLayout {
         return mImgSource;
     }
 
-    BrushDrawingView getBrushDrawingView() {
+    protected ImageFilterView getImageFilterView() {
+        return mImageFilterView;
+    }
+
+    protected BrushDrawingView getBrushDrawingView() {
         return mBrushDrawingView;
     }
 
