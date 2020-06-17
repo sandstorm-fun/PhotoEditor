@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.UiThread;
+import androidx.appcompat.widget.AppCompatTextView;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -149,7 +150,7 @@ public class PhotoEditor implements BrushViewChangeListener {
     public void addText(String text, @Nullable TextStyleBuilder styleBuilder) {
         brushDrawingView.setBrushDrawingMode(false);
         final View textRootView = getLayout(ViewType.TEXT);
-        final TextView textInputTv = textRootView.findViewById(R.id.tvPhotoEditorText);
+        final AppCompatTextView textInputTv = textRootView.findViewById(R.id.tvPhotoEditorText);
         final ImageView imgClose = textRootView.findViewById(R.id.imgPhotoEditorClose);
         final FrameLayout frmBorder = textRootView.findViewById(R.id.frmBorder);
 
@@ -218,7 +219,7 @@ public class PhotoEditor implements BrushViewChangeListener {
      * @param styleBuilder style to apply on {@link TextView}
      */
     public void editText(@NonNull View view, String inputText, @Nullable TextStyleBuilder styleBuilder) {
-        TextView inputTextView = view.findViewById(R.id.tvPhotoEditorText);
+        AppCompatTextView inputTextView = view.findViewById(R.id.tvPhotoEditorText);
         if (inputTextView != null && addedViews.contains(view) && !TextUtils.isEmpty(inputText)) {
             inputTextView.setText(inputText);
             if (styleBuilder != null)
@@ -250,7 +251,7 @@ public class PhotoEditor implements BrushViewChangeListener {
     public void addEmoji(Typeface emojiTypeface, String emojiName) {
         brushDrawingView.setBrushDrawingMode(false);
         final View emojiRootView = getLayout(ViewType.EMOJI);
-        final TextView emojiTextView = emojiRootView.findViewById(R.id.tvPhotoEditorText);
+        final AppCompatTextView emojiTextView = emojiRootView.findViewById(R.id.tvPhotoEditorText);
         final FrameLayout frmBorder = emojiRootView.findViewById(R.id.frmBorder);
         final ImageView imgClose = emojiRootView.findViewById(R.id.imgPhotoEditorClose);
 
@@ -323,7 +324,7 @@ public class PhotoEditor implements BrushViewChangeListener {
         switch (viewType) {
             case TEXT:
                 rootView = mLayoutInflater.inflate(R.layout.view_photo_editor_text, null);
-                TextView txtText = rootView.findViewById(R.id.tvPhotoEditorText);
+                AppCompatTextView txtText = rootView.findViewById(R.id.tvPhotoEditorText);
                 if (txtText != null && mDefaultTextTypeface != null) {
                     txtText.setGravity(Gravity.CENTER);
                     if (mDefaultEmojiTypeface != null) {
@@ -336,7 +337,7 @@ public class PhotoEditor implements BrushViewChangeListener {
                 break;
             case EMOJI:
                 rootView = mLayoutInflater.inflate(R.layout.view_photo_editor_text, null);
-                TextView txtTextEmoji = rootView.findViewById(R.id.tvPhotoEditorText);
+                AppCompatTextView txtTextEmoji = rootView.findViewById(R.id.tvPhotoEditorText);
                 if (txtTextEmoji != null) {
                     if (mDefaultEmojiTypeface != null) {
                         txtTextEmoji.setTypeface(mDefaultEmojiTypeface);
